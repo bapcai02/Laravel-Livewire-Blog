@@ -21,6 +21,7 @@
 
     <!-- Favicon -->
     <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
+    @livewireStyles
 </head>
 <body id="page-top">
 
@@ -68,6 +69,14 @@
             <a class="nav-link" href="{{ route('about') }}">
                 <i class="fas fa-fw fa-hands-helping"></i>
                 <span>{{ __('About') }}</span>
+            </a>
+        </li>
+
+         <!-- Nav Item - User -->
+         <li class="nav-item {{ Nav::isRoute('user') }}">
+            <a class="nav-link" href="{{ route('user') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('User') }}</span>
             </a>
         </li>
 
@@ -329,5 +338,6 @@
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+@livewireScripts
 </body>
 </html>
