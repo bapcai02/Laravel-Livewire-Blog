@@ -43,8 +43,8 @@
                                     <td>{{ $value->password }}</td>
                                     <td>{{ $value->remember_token }}</td>
                                     <td>
-                                        <i id="edit" style="cursor: pointer;" class="fas fa-fw fa-user"></i>
-                                        <i id="delete" style="cursor: pointer;" class="fas fa-fw fa-trash"></i>
+                                        <i wire:click="getOneUser({{ $value->id }})" data-toggle="modal" data-target="#editModal" id="edit" style="cursor: pointer;" class="fas fa-fw fa-user"></i>
+                                        <i data-toggle="modal" data-target="#deleteModal" id="delete" style="cursor: pointer;" class="fas fa-fw fa-trash"></i>
                                     </td>
                                 <tr>
                             @endforeach
@@ -54,6 +54,60 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
+<!-- Edit Modal-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form wire:submit.prevent="submit">
+                <div class="modal-body">
+                    <div class="mb-3 mt-4">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" wire:model="name">
+                        @error('name') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control" wire:model="email">
+                        @error('email') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" wire:model="password">
+                        @error('password') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
+                    <button class="btn btn-link" type="submit" data-dismiss="modal">{{ __('Submit') }}</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to delete this user?</div>
+            <div class="modal-footer">
+                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
+                <a class="btn btn-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+            </div>
+        </div>
     </div>
 </div>
